@@ -1,0 +1,34 @@
+---
+title: "R_analysis_Promoter"
+author: "Norman Kuo"
+date: "April 13, 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Load Promoter prediction data
+```{r}
+Promoter = read.table('fabg1G609A.fasta_output.txt', header=T, sep='\t')
+```
+
+Attach dataset
+```{r}
+str(Promoter)
+attach(Promoter)
+```
+Call ggplot2
+```{r}
+library(ggplot2)
+```
+
+Plot linegraph with ggplot
+```{r}
+ggplot(Promoter, aes(x=Position, y=Percent.Accuracy)) +  geom_line()
+```
+Use geom smooth to see the curve to see region that has highest percent accuracy, which is where promoter region is
+```{r}
+plot = ggplot(Promoter, aes(x=Position, y=Percent.Accuracy)) +  geom_point()+ geom_smooth(span=0.1)
+plot
+```
+
